@@ -1,6 +1,6 @@
 cask "lloyd" do
-  version "0.1.0"
-  sha256 "193b9de6962e363ff9d5c54f2ad56ed038f7fcf83af828e6ae297bfe0238379e"
+  version "0.1.1"
+  sha256 "906649ec252705454203940b7fb4b18847131f154dfa96e4e3730848de6a3a5b"
 
   url "https://github.com/benwbooth/lloyd/releases/download/v#{version}/Lloyd.dmg"
   name "Lloyd"
