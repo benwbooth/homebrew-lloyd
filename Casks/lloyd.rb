@@ -11,11 +11,16 @@ cask "lloyd" do
 
   app "Lloyd.app"
 
-  caveats <<~EOS
-    Lloyd is signed but not notarized. On first launch, right-click the app
-    and choose Open (or allow it in System Settings > Privacy & Security).
+  # App is signed but not notarized, so Gatekeeper quarantines it on every
+  # install/upgrade. Strip the quarantine attribute so it launches without the
+  # "Apple could not verify ... is free of malware" prompt.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Lloyd.app"]
+  end
 
-    It needs two permissions, prompted on first use:
+  caveats <<~EOS
+    Lloyd needs two permissions, prompted on first use:
       Screen Recording - to capture the hidden menu-bar icons.
       Accessibility    - to move menu-bar items and forward clicks.
     Enable both under System Settings > Privacy & Security, then relaunch.
